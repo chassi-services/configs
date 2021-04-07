@@ -6,6 +6,14 @@ eureka:
     instance-id: ${spring.application.name}:${random.uuid}
 server:
   port: 8081
+
+#this is a bug that needs to be resolved
+management:
+  metrics:
+    export:
+      wavefront:
+        apiToken: ""
+
 ---
 spring:
   config:
