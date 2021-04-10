@@ -1,5 +1,4 @@
-# COMMON APPLICATION PROPERTIES
-
+debug: true
 server:
   # start services on random port by default
   port: 0
@@ -25,10 +24,16 @@ spring:
     hibernate:
       ddl-auto: none
 
-# Spring Boot 1.5 makes actuator secure by default
-management.security.enabled: false
-# Enable all Actuators and not only the two available by default /health and /info starting Spring Boot 2.0
-management.endpoints.web.exposure.include: "*"
+  boot:
+    admin:
+      client:
+        url: http://admin-server:9090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
 
 # Temporary hack required by the Spring Boot 2 / Spring Cloud Finchley branch
 # Waiting issue https://github.com/spring-projects/spring-boot/issues/13042
@@ -45,14 +50,21 @@ management:
       enabled: true
     prometheus:
       enabled: true
+    health:
+      # indica que health deve mostrar detalhes sempre
+      show-details: always
   endpoints:
     web:
       exposure:
+        # alem do health e do info ele sempre vai export todos endpoints disponiveis
         include: '*'
   metrics:
     export:
       prometheus:
         enabled: true
+  security:
+    enabled: false
+
 
 ---
 spring:
