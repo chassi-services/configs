@@ -1,0 +1,33 @@
+﻿spring:
+  config:
+    activate:
+      on-profile: kubernetes
+  cloud:
+    config:
+      enabled: false
+    kubernetes:
+      reload:
+        strategy: restart-context
+        enabled: true
+      config:
+        enabled: true
+        name: sales-config
+management:
+  endpoint:
+    restart:
+      enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: tas4k8s
+  cloud:
+    config:
+      enabled: false
+    kubernetes:
+      reload:
+        strategy: restart-context
+        enabled: true
+      config:
+        enabled: true
+        name: sales-config

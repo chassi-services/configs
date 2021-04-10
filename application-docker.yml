@@ -1,0 +1,12 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://admin-server:9090
+  zipkin:
+    baseUrl: http://tracing-server:9411
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka

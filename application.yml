@@ -7,9 +7,6 @@ server:
 
 # embedded database init, supports mysql too trough the 'mysql' spring profile
 spring:
-  datasource:
-    schema: classpath*:db/hsqldb/schema.sql
-    data: classpath*:db/hsqldb/data.sql
   sleuth:
     sampler:
       probability: 1.0
@@ -27,18 +24,22 @@ spring:
   boot:
     admin:
       client:
-        url: http://admin-server:9090
+        url: http://localhost:9090
+  zipkin:
+    baseUrl: http://localhost:9411
 
 eureka:
   client:
+    enabled: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-
+      defaultZone: http://localhost:9091/eureka
+  instance:
+    # enable to register multiple app instances with a random server port
+    instance-id: ${spring.application.name}:${random.uuid}
 
 # Temporary hack required by the Spring Boot 2 / Spring Cloud Finchley branch
 # Waiting issue https://github.com/spring-projects/spring-boot/issues/13042
 spring.cloud.refresh.refreshable: false
-
 
 # Logging
 logging.level.org.springframework: INFO
@@ -62,23 +63,9 @@ management:
     export:
       prometheus:
         enabled: true
+      wavefront:
+        apiToken: "0f0d1f11-5b89-4513-b5bd-0a9e3189043d"
+
   security:
     enabled: false
 
-
----
-spring:
-  config:
-    activate:
-      on-profile: mysql
-  jpa:
-    hibernate:
-      ddl-auto: none
-  datasource:
-    schema: classpath*:db/mysql/schema.sql
-    data: classpath*:db/mysql/data.sql
-    url: jdbc:mysql://mysql_db:3306/petclinic?useSSL=false
-    username: root
-    password: petclinic
-    initialization-mode: always
-    platform: mysql

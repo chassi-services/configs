@@ -1,0 +1,7 @@
+﻿server:
+  port: 8082
+
+vets:
+  cache:
+    ttl: 60
+    heap-size: 100

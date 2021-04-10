@@ -1,0 +1,21 @@
+﻿spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql_db:3306/sales_db?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    platform: mysql
+    initialization-mode: always
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    schema: classpath*:db/mysql/schema.sql
+    data: classpath*:db/mysql/data.sql
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
