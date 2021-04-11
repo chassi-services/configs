@@ -21,17 +21,25 @@ spring:
 
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id: authentication
           uri: http://auth-service:8081
           predicates:
             - Path=/api/auth/**
+          filters:
+            - RewritePath=/api/auth(?<segment>/?.*), $\{segment}
         - id: sales
           uri: http://sales-service:8082
           predicates:
             - Path=/**
           filters:
-            - StripPrefix=1
+            - RewritePath=/(?<segment>/?.*), $\{segment}
+#          filters:
+#            - StripPrefix=1
+
   #        - id: monolito
   #          uri: http://localhost:8080
   #          predicates:
