@@ -24,6 +24,7 @@ spring:
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
       routes:
         - id: authentication
           uri: http://auth-service:8081

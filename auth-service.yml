@@ -44,4 +44,6 @@ velocity:
     location: /templates/
 prop:
   swagger:
-    enabled: false
+    enabled: true
+  actuator:
+    enabled: true
