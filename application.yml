@@ -1,4 +1,4 @@
-debug: true
+debug: false
 server:
   # start services on random port by default
   port: 0
