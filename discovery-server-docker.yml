@@ -7,6 +7,6 @@ spring:
       client:
         url: http://admin-server:9090
 
-eureka:
-  instance:
-    hostname: discovery-server
+#eureka:
+#  instance:
+#    hostname: discovery-server

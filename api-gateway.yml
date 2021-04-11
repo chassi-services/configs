@@ -23,13 +23,13 @@ spring:
     gateway:
       routes:
         - id: authentication
-          uri: http://localhost:8081
+          uri: http://auth-service:8081
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
         - id: sales
-          uri: http://localhost:8082
+          uri: http://sales-service:8082
           predicates:
-            - Path=/sales/**
+            - Path=/vets/**
           filters:
             - StripPrefix=1
   #        - id: monolito
