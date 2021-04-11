@@ -29,7 +29,7 @@ spring:
         - id: sales
           uri: http://sales-service:8082
           predicates:
-            - Path=/vets/**
+            - Path=/**
           filters:
             - StripPrefix=1
   #        - id: monolito
