@@ -27,17 +27,17 @@ spring:
           lower-case-service-id: true
       routes:
         - id: authentication
-          uri: http://auth-service:8081
+          uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
 #          filters:
 #            - RewritePath=/api/auth/(?<segment>/?.*), $\{segment}
         - id: sales
-          uri: http://sales-service:8082
+          uri: lb://sales-service
           predicates:
             - Path=/**
-          filters:
-            - RewritePath=/(?<segment>/?.*), $\{segment}
+#          filters:
+#            - RewritePath=/(?<segment>/?.*), $\{segment}
 #          filters:
 #            - StripPrefix=1
 
