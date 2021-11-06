@@ -11,7 +11,7 @@ spring.messages.basename: messages/messages
 
 # The OAuth2 server definition that would be used to send the authorization requests to
 authserver:
-  hostname: localhost
+  hostname: auth-service
   port: 8081
   contextPath: auth
 
@@ -52,6 +52,8 @@ spring:
         secure: false
         path: /,/**/*.html
     client:
+#      accessTokenUri: lb://auth-service/oauth/token
+#      userAuthorizationUri: lb://auth-service/api/auth/authorize
       accessTokenUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/token
       userAuthorizationUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/authorize
       clientId: client
@@ -61,7 +63,7 @@ spring:
     # information about grants and authentication in the token itself.
     # Note that the "/user" endpoint needs to provide the principle of the logged in user (/me endpoint)
     resource:
-      userInfoUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/me
+      userInfoUri: lb://auth-service/api/user/me
       preferTokenInfo: false
 
 logging:
